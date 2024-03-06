@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
@@ -22,8 +24,12 @@ type CreateDishUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class CreateDishUseCase {
-  constructor(private dishesRepository: DishesRepository) {}
+  constructor(
+    @inject('DishesRepository')
+    private dishesRepository: DishesRepository,
+  ) {}
 
   async execute(
     request: CreateDishUseCaseRequest,

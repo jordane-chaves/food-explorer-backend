@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
@@ -27,10 +29,14 @@ type EditDishUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class EditDishUseCase {
   constructor(
+    @inject('DishesRepository')
     private dishesRepository: DishesRepository,
+    @inject('DishIngredientsRepository')
     private dishIngredientsRepository: DishIngredientsRepository,
+    @inject('DishImagesRepository')
     private dishImagesRepository: DishImagesRepository,
   ) {}
 

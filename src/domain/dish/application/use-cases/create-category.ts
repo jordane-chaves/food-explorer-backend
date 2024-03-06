@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, right } from '@/core/either'
 
 import { Category } from '../../enterprise/entities/category'
@@ -14,8 +16,12 @@ type CreateCategoryUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class CreateCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepository) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: CategoriesRepository,
+  ) {}
 
   async execute(
     request: CreateCategoryUseCaseRequest,

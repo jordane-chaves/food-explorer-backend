@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, left, right } from '@/core/either'
 
 import { Customer } from '../../enterprise/entities/customer'
@@ -18,9 +20,12 @@ type RegisterCustomerUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class RegisterCustomerUseCase {
   constructor(
+    @inject('CustomersRepository')
     private customersRepository: CustomersRepository,
+    @inject('HashGenerator')
     private hashGenerator: HashGenerator,
   ) {}
 

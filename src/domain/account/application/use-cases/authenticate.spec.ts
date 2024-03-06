@@ -1,40 +1,41 @@
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
 import { FakeHasher } from 'test/cryptography/fake-hasher'
-import { makeCustomer } from 'test/factories/make-customer'
-import { InMemoryCustomersRepository } from 'test/repositories/in-memory-customers-repository'
+import { makeUser } from 'test/factories/make-user'
+import { InMemoryUsersRepository } from 'test/repositories/in-memory-users-repository'
 
-import { AuthenticateCustomerUseCase } from './authenticate-customer'
+import { AuthenticateUseCase } from './authenticate'
 
-let inMemoryCustomersRepository: InMemoryCustomersRepository
+let inMemoryUsersRepository: InMemoryUsersRepository
 
 let fakeHasher: FakeHasher
 let fakeEncrypter: FakeEncrypter
 
-let sut: AuthenticateCustomerUseCase
+let sut: AuthenticateUseCase
 
-describe('Authenticate Customer', () => {
+describe('Authenticate', () => {
   beforeEach(() => {
-    inMemoryCustomersRepository = new InMemoryCustomersRepository()
+    inMemoryUsersRepository = new InMemoryUsersRepository()
 
     fakeHasher = new FakeHasher()
     fakeEncrypter = new FakeEncrypter()
 
-    sut = new AuthenticateCustomerUseCase(
-      inMemoryCustomersRepository,
+    sut = new AuthenticateUseCase(
+      inMemoryUsersRepository,
       fakeHasher,
       fakeEncrypter,
     )
   })
 
-  it('should be able to authenticate a customer', async () => {
+  it('should be able to authenticate', async () => {
     const encrypterSpy = vi.spyOn(fakeEncrypter, 'encrypt')
 
-    const customer = makeCustomer({
+    const user = makeUser({
       email: 'johndoe@example.com',
       password: await fakeHasher.hash('123456'),
+      role: 'customer',
     })
 
-    inMemoryCustomersRepository.items.push(customer)
+    inMemoryUsersRepository.items.push(user)
 
     const result = await sut.execute({
       email: 'johndoe@example.com',
@@ -47,7 +48,7 @@ describe('Authenticate Customer', () => {
     })
 
     expect(encrypterSpy).toHaveBeenCalledWith({
-      sub: customer.id.toString(),
+      sub: user.id.toString(),
       role: 'customer',
     })
   })

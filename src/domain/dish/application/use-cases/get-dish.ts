@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, left, right } from '@/core/either'
 
 import { DishDetails } from '../../enterprise/entities/value-objects/dish-details'
@@ -15,8 +17,12 @@ type GetDishUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class GetDishUseCase {
-  constructor(private dishesRepository: DishesRepository) {}
+  constructor(
+    @inject('DishesRepository')
+    private dishesRepository: DishesRepository,
+  ) {}
 
   async execute(
     request: GetDishUseCaseRequest,

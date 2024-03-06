@@ -16,6 +16,10 @@ export class InMemoryCategoriesRepository implements CategoriesRepository {
     return category
   }
 
+  async findMany(): Promise<Category[]> {
+    return this.items
+  }
+
   async create(category: Category): Promise<void> {
     this.items.push(category)
   }

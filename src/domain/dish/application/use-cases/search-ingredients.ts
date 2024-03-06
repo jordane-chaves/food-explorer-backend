@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, right } from '@/core/either'
 
 import { Ingredient } from '../../enterprise/entities/ingredient'
@@ -14,8 +16,12 @@ type SearchIngredientsUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class SearchIngredientsUseCase {
-  constructor(private ingredientsRepository: IngredientsRepository) {}
+  constructor(
+    @inject('IngredientsRepository')
+    private ingredientsRepository: IngredientsRepository,
+  ) {}
 
   async execute(
     request: SearchIngredientsUseCaseRequest,

@@ -1,0 +1,127 @@
+@baseUrl = http://localhost:3333
+@accessToken = {{authenticate.response.body.access_token}}
+
+# @name register
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "password": "123456"
+}
+
+###
+
+# @name register_admin
+POST {{baseUrl}}/register/admin
+Content-Type: application/json
+
+{
+  "name": "Admin",
+  "email": "admin@example.com",
+  "password": "123456"
+}
+
+###
+
+# @name authenticate
+POST {{baseUrl}}/sessions
+Content-Type: application/json
+
+{
+  "email": "johndoe@example.com",
+  "password": "123456"
+}
+
+###
+
+# @name create_category
+POST {{baseUrl}}/categories
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "Saladas"
+}
+
+###
+
+# @name list_categories
+GET {{baseUrl}}/categories
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+
+# @name upload_dish_image
+POST {{baseUrl}}/dishes/image
+Authorization: Bearer {{accessToken}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="sample-upload.png"
+Content-Type: image/png
+
+< ./test/e2e/sample-upload.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+# @name create_dish
+POST {{baseUrl}}/dishes
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "categoryId": "{{create_category.response.body.$.category.id}}",
+  "imageId": "{{upload_dish_image.response.body.$.imageId}}",
+  "name": "Salada Ravanello",
+  "description": "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. O pão naan dá um toque especial.",
+  "price": 50.48,
+  "ingredients": ["alface", "pão naan"]
+}
+
+###
+
+# @name fetch_dishes
+GET {{baseUrl}}/dishes?query=salada
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+
+# @name get_dish
+GET {{baseUrl}}/dishes/{{fetch_dishes.response.body.$.dishes[0].id}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+
+# @name edit_dish
+PUT {{baseUrl}}/dishes/{{fetch_dishes.response.body.$.dishes[0].id}}
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "categoryId": "{{create_category.response.body.$.category.id}}",
+  "imageId": "{{upload_dish_image.response.body.$.imageId}}",
+  "name": "Salada Ravanello",
+  "description": "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. O pão naan dá um toque especial.",
+  "price": 100.25,
+  "ingredients": ["alface"]
+}
+
+###
+
+# @name delete_dish
+DELETE {{baseUrl}}/dishes/5d5435b0-9aed-47a9-8449-dad2686d49fe
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+
+# @name search_ingredients
+GET {{baseUrl}}/ingredients?query=al
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json

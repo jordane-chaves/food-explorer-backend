@@ -1,1 +1,18 @@
+# dependencies
 node_modules
+
+# environment
+.env*
+!.env.example
+
+# database
+*.db
+*.sqlite
+*.sqlite3
+
+# docker
+data
+
+# tmp
+tmp/*
+!.gitkeep

@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, left, right } from '@/core/either'
 
 import { DishesRepository } from '../repositories/dishes-repository'
@@ -9,8 +11,12 @@ interface DeleteDishUseCaseRequest {
 
 type DeleteDishUseCaseResponse = Either<ResourceNotFoundError, null>
 
+@injectable()
 export class DeleteDishUseCase {
-  constructor(private dishesRepository: DishesRepository) {}
+  constructor(
+    @inject('DishesRepository')
+    private dishesRepository: DishesRepository,
+  ) {}
 
   async execute(
     request: DeleteDishUseCaseRequest,

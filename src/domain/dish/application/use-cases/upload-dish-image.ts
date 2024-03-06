@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+
 import { Either, left, right } from '@/core/either'
 
 import { Image } from '../../enterprise/entities/image'
@@ -18,9 +20,12 @@ type UploadDishImageUseCaseResponse = Either<
   }
 >
 
+@injectable()
 export class UploadDishImageUseCase {
   constructor(
+    @inject('ImagesRepository')
     private imagesRepository: ImagesRepository,
+    @inject('Uploader')
     private uploader: Uploader,
   ) {}
 
