@@ -49,6 +49,7 @@ export class KnexDishImagesRepository implements DishImagesRepository {
   async save(image: DishImage): Promise<void> {
     const files = await knex('images')
       .where('dish_id', image.dishId.toString())
+      .andWhereNot('id', image.imageId.toString())
       .delete()
       .returning('url')
 

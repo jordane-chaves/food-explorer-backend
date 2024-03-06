@@ -115,7 +115,7 @@ Content-Type: application/json
 ###
 
 # @name delete_dish
-DELETE {{baseUrl}}/dishes/5d5435b0-9aed-47a9-8449-dad2686d49fe
+DELETE {{baseUrl}}/dishes/a1ad9987-dd5f-4543-b907-b3ed1da85767
 Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
