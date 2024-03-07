@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
 
+import { UserRoles } from '@/@types/user-roles'
 import { env } from '@/infra/env'
 
 import { UnauthorizedError } from '../errors/unauthorized-error'
 
 interface Payload {
   sub: string
-  role: string
+  role: UserRoles
 }
 
 export async function verifyJWT(

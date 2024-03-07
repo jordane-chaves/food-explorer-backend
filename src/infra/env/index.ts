@@ -7,7 +7,6 @@ expand(config({ path: '.env' }))
 const envSchema = z.object({
   NODE_ENV: z.enum(['dev', 'production', 'test']).default('dev'),
   PORT: z.coerce.number().optional().default(3333),
-  DATABASE_CLIENT: z.enum(['pg', 'sqlite3']).optional().default('pg'),
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string(),
   STORAGE_PUBLIC_URL: z.string().url(),
