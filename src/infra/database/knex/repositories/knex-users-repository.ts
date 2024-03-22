@@ -18,4 +18,18 @@ export class KnexUsersRepository implements UsersRepository {
 
     return KnexUserMapper.toDomain(user)
   }
+
+  async findById(id: string): Promise<User | null> {
+    const user = await knex('users')
+      .where({
+        id,
+      })
+      .first()
+
+    if (!user) {
+      return null
+    }
+
+    return KnexUserMapper.toDomain(user)
+  }
 }

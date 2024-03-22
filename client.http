@@ -36,6 +36,13 @@ Content-Type: application/json
 
 ###
 
+# @name profile
+GET {{baseUrl}}/profile
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+###
+
 # @name create_category
 POST {{baseUrl}}/categories
 Authorization: Bearer {{accessToken}}
