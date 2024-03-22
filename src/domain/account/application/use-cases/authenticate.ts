@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe'
 
+import authConfig from '@/config/auth'
 import { Either, left, right } from '@/core/either'
 
 import { Encrypter } from '../cryptography/encrypter'
@@ -16,6 +17,7 @@ type AuthenticateUseCaseResponse = Either<
   WrongCredentialsError,
   {
     accessToken: string
+    refreshToken: string
   }
 >
 
@@ -55,8 +57,19 @@ export class AuthenticateUseCase {
       role: user.role,
     })
 
+    const expiresRefreshTokenInSeconds =
+      Math.floor(Date.now() / 1000) +
+      authConfig.refreshTokenExpiresInMilliseconds / 1000
+
+    const refreshToken = await this.encrypter.encrypt({
+      sub: user.id.toString(),
+      role: user.role,
+      exp: expiresRefreshTokenInSeconds,
+    })
+
     return right({
       accessToken,
+      refreshToken,
     })
   }
 }

@@ -9,7 +9,12 @@ import { routes } from './routes'
 export const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  }),
+)
 
 const storagePublicUrl = new URL(env.STORAGE_PUBLIC_URL)
 

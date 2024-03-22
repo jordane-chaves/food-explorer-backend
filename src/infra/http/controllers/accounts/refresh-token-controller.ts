@@ -1,35 +1,32 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { z } from 'zod'
 
 import authConfig from '@/config/auth'
-import { AuthenticateUseCase } from '@/domain/account/application/use-cases/authenticate'
-import { WrongCredentialsError } from '@/domain/account/application/use-cases/errors/wrong-credentials-error'
+import { InvalidTokenError } from '@/domain/account/application/use-cases/errors/invalid-token-error'
+import { RefreshTokenUseCase } from '@/domain/account/application/use-cases/refresh-token'
 
 import { BadRequestError } from '../../errors/bad-request-error'
 import { UnauthorizedError } from '../../errors/unauthorized-error'
 
-export class AuthenticateController {
+export class RefreshTokenController {
   async handle(request: Request, response: Response) {
-    const authenticateBodySchema = z.object({
-      email: z.string().email(),
-      password: z.string(),
-    })
+    const cookies = request.headers.cookie
 
-    const { email, password } = authenticateBodySchema.parse(request.body)
+    if (!cookies) {
+      throw new UnauthorizedError('Token missing')
+    }
 
-    const authenticate = container.resolve(AuthenticateUseCase)
+    const [, token] = cookies.split('refreshToken=')
 
-    const result = await authenticate.execute({
-      email,
-      password,
-    })
+    const refreshTokenUseCase = container.resolve(RefreshTokenUseCase)
+
+    const result = await refreshTokenUseCase.execute({ token })
 
     if (result.isLeft()) {
       const error = result.value
 
       switch (error.constructor) {
-        case WrongCredentialsError:
+        case InvalidTokenError:
           throw new UnauthorizedError(error.message)
         default:
           throw new BadRequestError()
@@ -39,6 +36,7 @@ export class AuthenticateController {
     const { accessToken, refreshToken } = result.value
 
     return response
+      .status(200)
       .cookie('refreshToken', refreshToken, {
         path: '/',
         httpOnly: true,
