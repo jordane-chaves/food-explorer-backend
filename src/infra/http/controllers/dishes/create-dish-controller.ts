@@ -13,7 +13,10 @@ export class CreateDishController {
       imageId: z.string().uuid(),
       name: z.string(),
       description: z.string(),
-      price: z.number().min(0),
+      price: z
+        .number()
+        .min(0)
+        .transform((value) => Number(value.toFixed(2))),
       ingredients: z.string().array(),
     })
 

@@ -81,7 +81,7 @@ Authorization: Bearer {{accessToken}}
 Content-Type: application/json
 
 {
-  "categoryId": "{{create_category.response.body.$.category.id}}",
+  "categoryId": "{{list_categories.response.body.$.categories[0].id}}",
   "imageId": "{{upload_dish_image.response.body.$.imageId}}",
   "name": "Salada Ravanello",
   "description": "Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. O pão naan dá um toque especial.",
