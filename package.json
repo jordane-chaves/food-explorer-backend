@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsup src",
+    "start": "node dist/infra/http/server.js",
     "start:dev": "tsx watch src/infra/http/server.ts",
     "knex": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js",
     "knex:migrate": "node --no-warnings --import tsx ./node_modules/knex/bin/cli.js -- migrate:latest",
@@ -28,6 +30,7 @@
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.1",
     "sqlite3": "^5.1.7",
+    "tsup": "^8.0.2",
     "tsyringe": "^4.8.0",
     "zod": "^3.22.4"
   },
