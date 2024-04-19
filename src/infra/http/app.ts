@@ -1,6 +1,6 @@
+import '@/infra/adapters'
 import cors from 'cors'
 import express from 'express'
-import '@/infra/adapters'
 
 import { env } from '../env'
 import { errorHandler } from './middlewares/error-handler'
@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: ['https://jordane-food-explorer.netlify.app'],
   }),
 )
 
