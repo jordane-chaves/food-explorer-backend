@@ -40,7 +40,7 @@ export class RefreshTokenController {
       .cookie('refreshToken', refreshToken, {
         path: '/',
         httpOnly: true,
-        sameSite: true,
+        sameSite: 'none',
         secure: true,
         maxAge: authConfig.refreshTokenExpiresInMilliseconds,
       })

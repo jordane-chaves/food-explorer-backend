@@ -42,7 +42,7 @@ export class AuthenticateController {
       .cookie('refreshToken', refreshToken, {
         path: '/',
         httpOnly: true,
-        sameSite: true,
+        sameSite: 'none',
         secure: true,
         maxAge: authConfig.refreshTokenExpiresInMilliseconds,
       })
