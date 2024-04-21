@@ -16,8 +16,6 @@ app.use(
   }),
 )
 
-const storagePublicUrl = new URL(env.STORAGE_PUBLIC_URL)
-
-app.use(storagePublicUrl.pathname, express.static('tmp'))
+app.use('/images', express.static('tmp'))
 app.use(routes)
 app.use(errorHandler)

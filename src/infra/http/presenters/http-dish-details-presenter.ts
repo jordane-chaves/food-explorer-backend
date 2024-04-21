@@ -1,11 +1,11 @@
+import storageConfig from '@/config/storage'
 import { DishDetails } from '@/domain/dish/enterprise/entities/value-objects/dish-details'
-import { env } from '@/infra/env'
 
 import { HttpIngredientPresenter } from './http-ingredient-presenter'
 
 export class HttpDishDetailsPresenter {
   static toHTTP(dish: DishDetails) {
-    const image_url = env.STORAGE_PUBLIC_URL.concat(`/${dish.imageUrl}`)
+    const image_url = storageConfig.publicUrl.concat(`/${dish.imageUrl}`)
     const price = dish.priceInCents / 100
 
     return {

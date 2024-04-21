@@ -10,6 +10,10 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string(),
   STORAGE_PUBLIC_URL: z.string().url(),
+  CLOUDFLARE_ACCOUNT_ID: z.string(),
+  AWS_BUCKET_NAME: z.string(),
+  AWS_ACCESS_KEY_ID: z.string(),
+  AWS_SECRET_ACCESS_KEY: z.string(),
   ORIGINS: z
     .string()
     .transform((value) => value.split(',').map((link) => link.trim()))
