@@ -10,6 +10,12 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string(),
   STORAGE_PUBLIC_URL: z.string().url(),
+  ORIGINS: z
+    .string()
+    .transform((value) => value.split(',').map((link) => link.trim()))
+    .optional()
+    .or(z.boolean().optional())
+    .default(true),
 })
 
 const envParsed = envSchema.safeParse(process.env)

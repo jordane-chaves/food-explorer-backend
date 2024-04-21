@@ -12,14 +12,12 @@ app.use(express.json())
 app.use(
   cors({
     credentials: true,
-    origin: ['https://jordane-food-explorer.netlify.app'],
+    origin: env.ORIGINS,
   }),
 )
 
 const storagePublicUrl = new URL(env.STORAGE_PUBLIC_URL)
 
 app.use(storagePublicUrl.pathname, express.static('tmp'))
-
 app.use(routes)
-
 app.use(errorHandler)
