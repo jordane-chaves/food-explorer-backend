@@ -10,6 +10,7 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url(),
   JWT_SECRET: z.string(),
   STORAGE_PUBLIC_URL: z.string().url(),
+  STORAGE_PROVIDER: z.enum(['local', 'r2']).default('local'),
   CLOUDFLARE_ACCOUNT_ID: z.string(),
   AWS_BUCKET_NAME: z.string(),
   AWS_ACCESS_KEY_ID: z.string(),

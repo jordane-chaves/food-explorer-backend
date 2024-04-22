@@ -15,7 +15,7 @@ interface StorageConfig {
 const cloudFlareAccountId = env.CLOUDFLARE_ACCOUNT_ID
 
 export default {
-  driver: 'r2',
+  driver: env.STORAGE_PROVIDER,
 
   publicUrl: env.STORAGE_PUBLIC_URL,
 
