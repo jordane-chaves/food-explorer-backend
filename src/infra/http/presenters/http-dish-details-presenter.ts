@@ -15,6 +15,7 @@ export class HttpDishDetailsPresenter {
       name: dish.name,
       description: dish.description,
       price,
+      image_id: dish.imageId.toString(),
       image_url,
       ingredients: dish.ingredients.map(HttpIngredientPresenter.toHTTP),
       created_at: dish.createdAt,
