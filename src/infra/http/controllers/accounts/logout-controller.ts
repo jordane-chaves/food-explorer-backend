@@ -6,7 +6,7 @@ export class LogoutController {
       .cookie('refreshToken', '', {
         path: '/',
         httpOnly: true,
-        sameSite: true,
+        sameSite: 'none',
         secure: true,
         maxAge: 1000 * 2, // 2 seconds
       })
