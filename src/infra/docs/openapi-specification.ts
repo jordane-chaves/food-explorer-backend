@@ -16,6 +16,23 @@ export const openapiSpecification = swaggerJsdoc({
         },
       },
       schemas: {
+        Category: {
+          type: 'object',
+          properties: {
+            id: {
+              type: 'string',
+              format: 'uuid',
+            },
+            name: {
+              type: 'string',
+              minLength: 3,
+            },
+          },
+          example: {
+            id: '5e5207c1-5009-4c14-b9da-d92517c8835e',
+            name: 'Refeição',
+          },
+        },
         ValidationError: {
           type: 'object',
           properties: {

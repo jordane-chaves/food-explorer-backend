@@ -7,6 +7,37 @@ import { CreateCategoryUseCase } from '@/domain/dish/application/use-cases/creat
 import { BadRequestError } from '../../errors/bad-request-error'
 import { HttpCategoryPresenter } from '../../presenters/http-category-presenter'
 
+/**
+ * @openapi
+ * /categories:
+ *  post:
+ *    tags: ['Category']
+ *    summary: Create category
+ *    description: Create a new category.
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            required:
+ *              name
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *                minLength: 3
+ *            example:
+ *              name: Refeição
+ *    responses:
+ *      201:
+ *        description: Category created
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                category:
+ *                  $ref: '#/components/schemas/Category'
+ */
 export class CreateCategoryController {
   async handle(request: Request, response: Response) {
     const createCategoryBodySchema = z.object({
