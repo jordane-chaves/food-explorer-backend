@@ -39,7 +39,7 @@ import { ConflictError } from '../../errors/conflict-error'
  *              password: any-password
  *    responses:
  *      201:
- *        description: Created
+ *        description: Customer user created
  *      400:
  *        description: Bad request
  *        content:

@@ -22,19 +22,23 @@ import { HttpUserPresenter } from '../../presenters/http-user-presenter'
  *            schema:
  *              type: object
  *              properties:
- *                id:
- *                  type: string
- *                name:
- *                  type: string
- *                email:
- *                  type: string
- *                role:
- *                  type: string
+ *                user:
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: string
+ *                    name:
+ *                      type: string
+ *                    email:
+ *                      type: string
+ *                    role:
+ *                      type: string
  *              example:
- *                id: 0473954a-2046-46c6-8a6f-b740aa36658b
- *                name: John Doe
- *                email: johndoe@example.com
- *                role: customer
+ *                user:
+ *                  id: 0473954a-2046-46c6-8a6f-b740aa36658b
+ *                  name: John Doe
+ *                  email: johndoe@example.com
+ *                  role: customer
  *      400:
  *        description: Bad request
  *        content:

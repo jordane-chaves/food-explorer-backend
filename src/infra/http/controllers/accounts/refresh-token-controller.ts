@@ -25,7 +25,24 @@ import { UnauthorizedError } from '../../errors/unauthorized-error'
  *          example: eyJhbGciOiJIUzI1NiIsIn...
  *    responses:
  *      200:
- *        description: Returns success response.
+ *        description: >
+ *          Returns success response. <br>
+ *          The **access token** is returned in the response body.
+ *          You need to include this token in subsequent requests.
+ *        headers:
+ *          Set-Cookie:
+ *            schema:
+ *              type: string
+ *              example: refreshToken=eyJhbGciOiJIUzI1NiIsInR5c...; Expires=Fri, 29 Mar 2024 15:21:14 GMT; Max-Age=604800; Path=/; Secure; HttpOnly; SameSite=Strict; Domain=localhost
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                access_token:
+ *                  type: string
+ *              example:
+ *                access_token: eyJhbGciOiJIUzI1NiIsIn...
  *      400:
  *        description: Bad request
  *      401:
