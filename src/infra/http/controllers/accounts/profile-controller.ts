@@ -7,6 +7,44 @@ import { ResourceNotFoundError } from '@/domain/dish/application/use-cases/error
 import { BadRequestError } from '../../errors/bad-request-error'
 import { HttpUserPresenter } from '../../presenters/http-user-presenter'
 
+/**
+ * @openapi
+ * /profile:
+ *  get:
+ *    tags: ['Account']
+ *    summary: Get profile
+ *    description: Get authenticated user profile
+ *    responses:
+ *      200:
+ *        description: Returns success response.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                id:
+ *                  type: string
+ *                name:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                role:
+ *                  type: string
+ *              example:
+ *                id: 0473954a-2046-46c6-8a6f-b740aa36658b
+ *                name: John Doe
+ *                email: johndoe@example.com
+ *                role: customer
+ *      400:
+ *        description: Bad request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GeneralError'
+ *              example:
+ *                message: User not found
+ *                statusCode: 400
+ */
 export class ProfileController {
   async handle(request: Request, response: Response) {
     const userId = request.user.id

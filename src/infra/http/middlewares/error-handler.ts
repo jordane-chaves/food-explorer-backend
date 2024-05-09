@@ -1,6 +1,6 @@
 import 'express-async-errors'
 
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { ZodError } from 'zod'
 
 import { env } from '@/infra/env'
@@ -16,16 +16,16 @@ export function errorHandler(
 ) {
   if (error instanceof ZodError) {
     return response.status(400).json({
-      statusCode: 400,
       message: 'Validation error',
-      issues: error.format(),
+      fields: error.flatten().fieldErrors,
+      statusCode: 400,
     })
   }
 
   if (error instanceof HttpError) {
     return response.status(error.statusCode).json({
-      statusCode: error.statusCode,
       message: error.message,
+      statusCode: error.statusCode,
     })
   }
 
@@ -36,7 +36,7 @@ export function errorHandler(
   }
 
   return response.status(500).json({
-    statusCode: 500,
     message: 'Internal server error',
+    statusCode: 500,
   })
 }

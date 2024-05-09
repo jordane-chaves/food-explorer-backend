@@ -8,6 +8,62 @@ import { RegisterAdminUseCase } from '@/domain/account/application/use-cases/reg
 import { BadRequestError } from '../../errors/bad-request-error'
 import { ConflictError } from '../../errors/conflict-error'
 
+/**
+ * @openapi
+ * /register/admin:
+ *  post:
+ *    tags: ['Account']
+ *    summary: Create admin
+ *    description: Create an administrator account to manage the restaurant
+ *    security: []
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            required:
+ *              name
+ *              email
+ *              password
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *                minLength: 6
+ *            example:
+ *              name: Admin
+ *              email: admin@example.com
+ *              password: any-password
+ *    responses:
+ *      201:
+ *        description: Created
+ *      400:
+ *        description: Bad request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ValidationError'
+ *              example:
+ *                message: Validation error
+ *                fields:
+ *                  name: ['Required']
+ *                  email: ['Invalid email']
+ *                statusCode: 400
+ *      409:
+ *        description: >
+ *          Returns conflict response.<br>
+ *          This response means that the user already exists.
+ *        content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/GeneralError'
+ *             example:
+ *               message: User "admin@example.com" already exists.
+ *               statusCode: 409
+ */
 export class RegisterAdminController {
   async handle(request: Request, response: Response) {
     const registerAdminBodySchema = z.object({

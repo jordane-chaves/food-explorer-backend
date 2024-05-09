@@ -8,6 +8,36 @@ import { RefreshTokenUseCase } from '@/domain/account/application/use-cases/refr
 import { BadRequestError } from '../../errors/bad-request-error'
 import { UnauthorizedError } from '../../errors/unauthorized-error'
 
+/**
+ * @openapi
+ * /token/refresh:
+ *  patch:
+ *    tags: ['Account']
+ *    summary: Refresh token
+ *    description: Generates a new access token via a refresh token
+ *    security: []
+ *    parameters:
+ *      - name: refreshToken
+ *        in: cookie
+ *        required: true
+ *        schema:
+ *          type: string
+ *          example: eyJhbGciOiJIUzI1NiIsIn...
+ *    responses:
+ *      200:
+ *        description: Returns success response.
+ *      400:
+ *        description: Bad request
+ *      401:
+ *        description: Unauthorized
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GeneralError'
+ *              example:
+ *                message: Invalid Token
+ *                statusCode: 401
+ */
 export class RefreshTokenController {
   async handle(request: Request, response: Response) {
     const cookies = request.headers.cookie

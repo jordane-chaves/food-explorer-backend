@@ -52,6 +52,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Docker](https://www.docker.com/)
 - [JWT](https://jwt.io/)
 - [Vitest](https://vitest.dev/)
+- [Swagger](https://swagger.io/)
+- [Scalar](https://scalar.com/swagger-editor)
 
 ## 🛠️ Pré requisitos
 
@@ -93,6 +95,7 @@ $ npm run knex:migrate
 $ npm run start:dev
 
 # O servidor inciará na porta:3333 - acesse <http://localhost:3333>
+# Documentação da API - acesse <http://localhost:3333/docs>
 ```
 
 ## 📝 Licença
