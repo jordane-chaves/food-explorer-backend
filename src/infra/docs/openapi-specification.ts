@@ -129,6 +129,10 @@ export const openapiSpecification = swaggerJsdoc({
               type: 'string',
             },
           },
+          example: {
+            id: 'ae54e5e7-71b3-44c9-ab6a-756534e2b0af',
+            name: 'Pão naan',
+          },
         },
         ValidationError: {
           type: 'object',

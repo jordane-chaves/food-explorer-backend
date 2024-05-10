@@ -7,6 +7,34 @@ import { SearchIngredientsUseCase } from '@/domain/dish/application/use-cases/se
 import { BadRequestError } from '../../errors/bad-request-error'
 import { HttpIngredientPresenter } from '../../presenters/http-ingredient-presenter'
 
+/**
+ * @openapi
+ * /ingredients:
+ *  get:
+ *    tags: ['Ingredient']
+ *    summary: Search ingredients
+ *    description: Search many ingredients
+ *    parameters:
+ *      - query:
+ *        name: query
+ *        description: Search by name of the ingredient.
+ *        in: query
+ *        required: false
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: Return success response.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                ingredients:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/Ingredient'
+ */
 export class SearchIngredientsController {
   async handle(request: Request, response: Response) {
     const searchIngredientsQueryParamsSchema = z.object({
