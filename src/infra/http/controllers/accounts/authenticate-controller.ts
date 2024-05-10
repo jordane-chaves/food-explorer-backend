@@ -9,6 +9,71 @@ import { WrongCredentialsError } from '@/domain/account/application/use-cases/er
 import { BadRequestError } from '../../errors/bad-request-error'
 import { UnauthorizedError } from '../../errors/unauthorized-error'
 
+/**
+ * @openapi
+ * /sessions:
+ *  post:
+ *    tags: ['Account']
+ *    summary: Authenticate user
+ *    description: Create user session
+ *    security: []
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            required:
+ *              email
+ *              password
+ *            type: object
+ *            properties:
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *            example:
+ *              email: 'johndoe@example.com'
+ *              password: '123456'
+ *    responses:
+ *      200:
+ *        description: >
+ *          Returns success response. <br>
+ *          The **access token** is returned in the response body.
+ *          You need to include this token in subsequent requests.
+ *        headers:
+ *          Set-Cookie:
+ *            schema:
+ *              type: string
+ *              example: refreshToken=eyJhbGciOiJIUzI1NiIsInR5c...; Expires=Fri, 29 Mar 2024 15:21:14 GMT; Max-Age=604800; Path=/; Secure; HttpOnly; SameSite=Strict; Domain=localhost
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                access_token:
+ *                  type: string
+ *              example:
+ *                access_token: eyJhbGciOiJIUzI1NiIsIn...
+ *      400:
+ *        description: Bad request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ValidationError'
+ *              example:
+ *                message: Validation error
+ *                fields:
+ *                  email: ['Invalid email']
+ *                statusCode: 400
+ *      401:
+ *        description: Unauthorized
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/GeneralError'
+ *              example:
+ *                message: Wrong credentials
+ *                statusCode: 401
+ */
 export class AuthenticateController {
   async handle(request: Request, response: Response) {
     const authenticateBodySchema = z.object({

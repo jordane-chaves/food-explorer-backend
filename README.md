@@ -38,7 +38,8 @@ Veja abaixo o diagrama do banco de dados:
 </p>
 
 > [!NOTE]
-> Link de deploy: https://food-explorer-backend-5xzl.onrender.com
+> [Link de deploy](https://food-explorer-backend-5xzl.onrender.com) <br>
+> [Link da documentação](https://food-explorer-backend-5xzl.onrender.com/docs)
 
 ## 🚀 Tecnologias
 
@@ -52,6 +53,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Docker](https://www.docker.com/)
 - [JWT](https://jwt.io/)
 - [Vitest](https://vitest.dev/)
+- [Swagger](https://swagger.io/)
+- [Scalar](https://scalar.com/swagger-editor)
 
 ## 🛠️ Pré requisitos
 
@@ -93,6 +96,7 @@ $ npm run knex:migrate
 $ npm run start:dev
 
 # O servidor inciará na porta:3333 - acesse <http://localhost:3333>
+# Documentação da API - acesse <http://localhost:3333/docs>
 ```
 
 ## 📝 Licença
