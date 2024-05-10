@@ -7,6 +7,34 @@ import { FetchDishesUseCase } from '@/domain/dish/application/use-cases/fetch-di
 import { BadRequestError } from '../../errors/bad-request-error'
 import { HttpDishDetailsPresenter } from '../../presenters/http-dish-details-presenter'
 
+/**
+ * @openapi
+ * /dishes:
+ *  get:
+ *    tags: ['Dish']
+ *    summary: List dishes
+ *    description: Search many dishes
+ *    parameters:
+ *      - query:
+ *        name: query
+ *        description: The search can be done by name or ingredients
+ *        in: query
+ *        required: false
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: Return success response.
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                dishes:
+ *                  type: array
+ *                  items:
+ *                    $ref: '#/components/schemas/DishDetails'
+ */
 export class FetchDishesController {
   async handle(request: Request, response: Response) {
     const fetchDishesQueryParamsSchema = z.object({

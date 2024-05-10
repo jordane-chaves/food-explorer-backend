@@ -37,6 +37,17 @@ import { HttpCategoryPresenter } from '../../presenters/http-category-presenter'
  *              properties:
  *                category:
  *                  $ref: '#/components/schemas/Category'
+ *      400:
+ *        description: Bad request
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/ValidationError'
+ *              example:
+ *                message: Validation error
+ *                fields:
+ *                  name: ['Required']
+ *                statusCode: 400
  */
 export class CreateCategoryController {
   async handle(request: Request, response: Response) {
