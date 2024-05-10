@@ -20,25 +20,7 @@ import { HttpUserPresenter } from '../../presenters/http-user-presenter'
  *        content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                user:
- *                  type: object
- *                  properties:
- *                    id:
- *                      type: string
- *                    name:
- *                      type: string
- *                    email:
- *                      type: string
- *                    role:
- *                      type: string
- *              example:
- *                user:
- *                  id: 0473954a-2046-46c6-8a6f-b740aa36658b
- *                  name: John Doe
- *                  email: johndoe@example.com
- *                  role: customer
+ *              $ref: '#/components/schemas/User'
  *      400:
  *        description: Bad request
  *        content:

@@ -33,7 +33,7 @@ export const openapiSpecification = swaggerJsdoc({
             name: 'Refeição',
           },
         },
-        DishDetails: {
+        Dish: {
           type: 'object',
           properties: {
             id: {
@@ -132,6 +132,36 @@ export const openapiSpecification = swaggerJsdoc({
           example: {
             id: 'ae54e5e7-71b3-44c9-ab6a-756534e2b0af',
             name: 'Pão naan',
+          },
+        },
+        User: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'object',
+              properties: {
+                id: {
+                  type: 'string',
+                },
+                name: {
+                  type: 'string',
+                },
+                email: {
+                  type: 'string',
+                },
+                role: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+          example: {
+            user: {
+              id: '0473954a-2046-46c6-8a6f-b740aa36658b',
+              name: 'John Doe',
+              email: 'johndoe@example.com',
+              role: 'customer',
+            },
           },
         },
         ValidationError: {

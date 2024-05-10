@@ -33,7 +33,7 @@ import { HttpDishDetailsPresenter } from '../../presenters/http-dish-details-pre
  *              type: object
  *              properties:
  *                dish:
- *                  $ref: '#/components/schemas/DishDetails'
+ *                  $ref: '#/components/schemas/Dish'
  *      400:
  *        description: Bad request
  *        content:

@@ -33,7 +33,7 @@ import { HttpDishDetailsPresenter } from '../../presenters/http-dish-details-pre
  *                dishes:
  *                  type: array
  *                  items:
- *                    $ref: '#/components/schemas/DishDetails'
+ *                    $ref: '#/components/schemas/Dish'
  */
 export class FetchDishesController {
   async handle(request: Request, response: Response) {
