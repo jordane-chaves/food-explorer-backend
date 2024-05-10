@@ -38,7 +38,8 @@ Veja abaixo o diagrama do banco de dados:
 </p>
 
 > [!NOTE]
-> Link de deploy: https://food-explorer-backend-5xzl.onrender.com
+> [Link de deploy](https://food-explorer-backend-5xzl.onrender.com) <br>
+> [Link da documentação](https://food-explorer-backend-5xzl.onrender.com/docs)
 
 ## 🚀 Tecnologias
 
