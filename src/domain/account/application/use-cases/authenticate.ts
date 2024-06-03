@@ -52,9 +52,14 @@ export class AuthenticateUseCase {
       return left(new WrongCredentialsError())
     }
 
+    const expiresAccessTokenInSeconds =
+      Math.floor(Date.now() / 1000) +
+      authConfig.accessTokenExpiresInMilliseconds / 1000
+
     const accessToken = await this.encrypter.encrypt({
       sub: user.id.toString(),
       role: user.role,
+      exp: expiresAccessTokenInSeconds,
     })
 
     const expiresRefreshTokenInSeconds =

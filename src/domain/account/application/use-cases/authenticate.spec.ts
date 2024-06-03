@@ -51,6 +51,7 @@ describe('Authenticate', () => {
     expect(encrypterSpy).toHaveBeenCalledWith({
       sub: user.id.toString(),
       role: 'customer',
+      exp: expect.any(Number),
     })
   })
 })
