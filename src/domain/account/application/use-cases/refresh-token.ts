@@ -39,7 +39,14 @@ export class RefreshTokenUseCase {
       return left(new InvalidTokenError())
     }
 
-    const accessToken = await this.encrypter.encrypt(payload)
+    const expiresAccessTokenInSeconds =
+      Math.floor(Date.now() / 1000) +
+      authConfig.accessTokenExpiresInMilliseconds / 1000
+
+    const accessToken = await this.encrypter.encrypt({
+      ...payload,
+      exp: expiresAccessTokenInSeconds,
+    })
 
     const expiresRefreshTokenInSeconds =
       Math.floor(Date.now() / 1000) +
