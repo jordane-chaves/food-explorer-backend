@@ -37,10 +37,6 @@ Veja abaixo o diagrama do banco de dados:
   <img alt="Diagrama do banco de dados" src="./.github/diagram.png" />
 </p>
 
-> [!NOTE]
-> [Link de deploy](https://food-explorer-backend-5xzl.onrender.com) <br>
-> [Link da documentação](https://food-explorer-backend-5xzl.onrender.com/docs)
-
 ## 🚀 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
